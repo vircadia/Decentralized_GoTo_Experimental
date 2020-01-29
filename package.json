@@ -1,0 +1,14 @@
+{
+  "name": "decentralized-goto",
+  "version": "1.0.0",
+  "description": "Decentralized GoTo For project-athena",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Darling",
+  "license": "ISC",
+  "dependencies": {
+    "ws": "^7.2.1"
+  }
+}
