@@ -15,7 +15,11 @@
     function startup() {
         goToAddress = Settings.getValue("goToDecentral", "");
         if (goToAddress == "") {
-            goToAddressNow = [];
+            var initialGoToList = Script.resolvePath("goto.json");
+            Menu.addMenuItem("GoTo > Unsubscribe from GoTo provider", initialGoToList);
+            goToAddressNow = [
+                initialGoToList
+            ];
             Settings.setValue("goToDecentral", goToAddressNow);
         }
         ui = new AppUi({
