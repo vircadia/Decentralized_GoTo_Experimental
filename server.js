@@ -83,6 +83,7 @@ wss.on('connection', function connection(ws) {
   ws.on('message', function incoming(data) {
     var onBlockList = false;
     var messageData = JSON.parse(data);
+    messageData.age = Date.now();
     var exist = false;
     let blockList = JSON.parse(fs.readFileSync('./blockList.json', 'utf-8'));
     for (let i = 0; i < blockList.length; i++) {
