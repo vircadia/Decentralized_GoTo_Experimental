@@ -28,9 +28,7 @@
     var ipAddress = Script.require(ipJsonUrl + "?" + Date.now());
     var interval = Script.setInterval(function () {
         var avatars = AvatarList.getAvatarIdentifiers();
-        var age = Date.now();
         var list = {
-            "age": age,
             "Domain Name": entity.domainName,
             "Owner": entity.owner,
             "Visit": "hifi://" + ipAddress.ip + ":" + entity.port + "/" + entityPosition.position.x + "," + entityPosition.position.y + "," + entityPosition.position.z + "/",
