@@ -67,7 +67,6 @@ setInterval(() => {
       nowLocationList[nowLocationList.length] = locationList[i];
     }
   }
-
   locationList = nowLocationList;
 }, 8000);
 
@@ -76,9 +75,19 @@ const WebSocket = require('ws');
 const wss = new WebSocket.Server({ port: 8080 });
 
 wss.on('connection', function connection(ws) {
-  ws.on('message', function incoming(data) {
+  ws.on('message', function incoming(data) {    
+    var onBlockList = false;
     var messageData = JSON.parse(data);
     var exist = false;
+    let blockList = JSON.parse(fs.readFileSync('./blockList.json', 'utf-8'));
+    for (let i = 0; i < blockList.length; i++) {
+      if (blockList[i] == messageData.Visit.split('/')[2].split(':')[0]) {
+        onBlockList = true;
+      }
+    }
+    if (onBlockList) {
+      return;
+    }
     for (let i = 0; i < locationList.length; i++) {
       if (locationList[i].id == messageData.id) {
         locationList[i] = messageData;
