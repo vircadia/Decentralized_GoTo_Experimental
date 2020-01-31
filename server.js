@@ -15,18 +15,23 @@ http.createServer(function (request, response) {
     '.js': "text/javascript"
   };
 
-  if (uri == "/goto.json") {
-    response.writeHead(200, { "Content-Type": "text/plain" });
-    response.write(JSON.stringify(locationList));
-    response.end();
-    return;
+  var pageData;
+
+  switch (uri) {
+    case "/goto.json":
+      pageData = JSON.stringify(locationList);
+      sendPage();
+      return;
+    case "/ip.json":
+      pageData = "{" + JSON.stringify("ip") + ": " + JSON.stringify(request.connection.remoteAddress.split(':')[3]) + "}";
+      sendPage();
+      return;
   }
 
-  if (uri == "/ip.json") {
-    response.writeHead(200, { "Content-Type": "text/plain" });
-    response.write("{" + JSON.stringify("ip") + ": " + JSON.stringify(request.connection.remoteAddress.split(':')[3]) + "}");
+  function sendPage() {
+    response.writeHead(200, { "Content-Type": "application/json" });
+    response.write(pageData);
     response.end();
-    return;
   }
 
   fs.exists(filename, function (exists) {
@@ -75,7 +80,7 @@ const WebSocket = require('ws');
 const wss = new WebSocket.Server({ port: 8080 });
 
 wss.on('connection', function connection(ws) {
-  ws.on('message', function incoming(data) {    
+  ws.on('message', function incoming(data) {
     var onBlockList = false;
     var messageData = JSON.parse(data);
     var exist = false;
