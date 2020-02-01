@@ -16,16 +16,30 @@ http.createServer(function (request, response) {
   };
 
   var pageData;
+  var pageInformation;
 
   switch (uri) {
     case "/goto.json":
-      pageData = JSON.stringify(locationList);
-      sendPage();
+      pageInformation = locationList;
+      prepareInformation();
       return;
     case "/ip.json":
       pageData = "{" + JSON.stringify("ip") + ": " + JSON.stringify(request.connection.remoteAddress.split(':')[3]) + "}";
       sendPage();
       return;
+  }
+
+  function prepareInformation() {
+    pageData = [];
+    for (let i = 0; i < pageInformation.length; i++) {
+      pageData[i] = {};
+      pageData[i]["Domain Name"] = pageInformation[i]["Domain Name"];
+      pageData[i].Owner = pageInformation[i].Owner;
+      pageData[i].Visit = pageInformation[i].Visit;
+      pageData[i].People = pageInformation[i].People;
+    }
+    pageData = JSON.stringify(pageData);
+    sendPage();
   }
 
   function sendPage() {
