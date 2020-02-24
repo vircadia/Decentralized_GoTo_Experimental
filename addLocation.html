@@ -155,7 +155,7 @@
                 retrievePortInformationResponse = messageData.goToAddresses;
                 for (let i = 0; i < retrievePortInformationResponse.length; i++) {
                     metaverseProvider = retrievePortInformationResponse[i].split("/")[2].split(":")[0];
-                    metaverseProviderList[metaverseProviderList.length] = "http://" + metaverseProvider + ":8081/decentralizedGoToServerScript.js";
+                    metaverseProviderList[metaverseProviderList.length] = "http://" + metaverseProvider + ":8081/d-goto/app/decentralizedGoToServerScript.js";
                 }
                 addToSelect();
             }

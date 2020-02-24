@@ -4,7 +4,7 @@
     var shutdownBool = false;
     var ipJsonUrl = Script.resolvePath("ip.json");
     var webSocketUrl = ipJsonUrl.split("/")[2].split(":")[0];
-    var WEB_SOCKET_URL = "ws://" + webSocketUrl + ":8080";
+    var WEB_SOCKET_URL = "ws://" + webSocketUrl + ":8081/d-goto/ws/";
     var id = Uuid.generate();
     var entityID;
     var entity;
