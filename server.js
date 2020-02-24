@@ -25,7 +25,7 @@ http.createServer(function (request, response) {
       return;
     case "/ip.json":
       // pageData = "{" + JSON.stringify("ip") + ": " + JSON.stringify(request.connection.remoteAddress.split(':')[3]) + "}";
-      pageData = "{" + JSON.stringify("ip") + ": " + JSON.stringify(request.headers['X-Forwarded-For']) + "}";
+      pageData = "{" + JSON.stringify("ip") + ": " + JSON.stringify(request.headers['x-forwarded-for']) + "}";
       sendPage();
       return;
   }
