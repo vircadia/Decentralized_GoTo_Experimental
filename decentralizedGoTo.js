@@ -23,7 +23,7 @@
             Settings.setValue("goToDecentral", goToAddressNow);
         }
         ui = new AppUi({
-            buttonName: "GoTo",
+            buttonName: "Find",
             home: Script.resolvePath("decentralizedGoTo.html"),
             icon: Script.resolvePath("goto-a.svg"),
             activeIcon: Script.resolvePath("goto-a-msg.svg")
@@ -96,7 +96,7 @@
         if (menuItem == "Subscribe to new GoTo provider") {
             goToAddress = Settings.getValue("goToDecentral", "");
             var arrayLength = goToAddress.length;
-            var prom = Window.prompt("Enter URL to GoTo Jason.", "");
+            var prom = Window.prompt("Enter URL to GoTo JSON.", "");
             if (prom) {
                 goToAddress[arrayLength] = prom;
                 Settings.setValue("goToDecentral", goToAddress);
