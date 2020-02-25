@@ -1,3 +1,10 @@
+//  decentralizedGoToServerScript.js
+//
+//  Created by Darlingnotin in 2019.
+//  Copyright 2019 Darlingnotin
+//
+//  Distributed under the ISC license.
+//  See the accompanying file LICENSE or https://opensource.org/licenses/ISC
 (function () {
     var ws;
     var wsReady = false;
