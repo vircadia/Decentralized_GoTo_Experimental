@@ -6,6 +6,8 @@
 //  Distributed under the ISC license.
 //  See the accompanying file LICENSE or https://opensource.org/licenses/ISC
 (function () {
+    var defaultGoToJSON = "https://metaverse.projectathena.io/interim/d-goto/app/goto.json";
+    
     var tablet = Tablet.getTablet("com.highfidelity.interface.tablet.system");
     Menu.menuItemEvent.connect(onMenuItemEvent);
     var AppUi = Script.require('appUi');
@@ -22,7 +24,7 @@
     function startup() {
         goToAddress = Settings.getValue("goToDecentral", "");
         if (goToAddress == "") {
-            var initialGoToList = Script.resolvePath("goto.json");
+            var initialGoToList = Script.resolvePath(defaultGoToJSON);
             Menu.addMenuItem("GoTo > Unsubscribe from GoTo provider", initialGoToList);
             goToAddressNow = [
                 initialGoToList
@@ -30,7 +32,7 @@
             Settings.setValue("goToDecentral", goToAddressNow);
         }
         ui = new AppUi({
-            buttonName: "Find",
+            buttonName: "Explore",
             home: Script.resolvePath("decentralizedGoTo.html"),
             icon: Script.resolvePath("goto-a.svg"),
             activeIcon: Script.resolvePath("goto-a-msg.svg")
