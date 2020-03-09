@@ -11,7 +11,8 @@
     var shutdownBool = false;
     var ipJsonUrl = Script.resolvePath("ip.json");
     var webSocketUrl = ipJsonUrl.split("/")[2].split(":")[0];
-    var WEB_SOCKET_URL = "ws://" + webSocketUrl + "/interim/d-goto/ws";
+    var pathToWS = "/interim/d-goto/ws";
+    var WEB_SOCKET_URL = "ws://" + webSocketUrl + pathToWS;
     var id = Uuid.generate();
     var entityID;
     var entity;
@@ -32,8 +33,15 @@
         }
         entityPosition = _entity;
     }
+    
     var ipAddress = Script.require(ipJsonUrl + "?" + Date.now());
+    
     var interval = Script.setInterval(function () {
+
+        if (entity.hasOwnProperty("ipAddress")) {
+            ipAddress.ip = entity.ipAddress;
+        }
+    
         var avatars = AvatarList.getAvatarIdentifiers();
         var list = {
             "Domain Name": entity.domainName,
@@ -70,6 +78,7 @@
 
     function connectWebSocket(timeout) {
         ws = new WebSocket(WEB_SOCKET_URL);
+        console.info("Connecting to WS:", WEB_SOCKET_URL);
         ws.onmessage = function incoming(_data) {
             var message = _data.data;
             var cmd = { FAILED: true };
