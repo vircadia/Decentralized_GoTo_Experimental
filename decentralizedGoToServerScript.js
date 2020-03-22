@@ -2,10 +2,15 @@
 //
 //  Created by Darlingnotin in 2019.
 //  Copyright 2019 Darlingnotin
+//  Copyright 2020 Vircadia Contributors
 //
 //  Distributed under the ISC license.
 //  See the accompanying file LICENSE or https://opensource.org/licenses/ISC
+//  https://metaverse.projectathena.io/interim/d-goto/app/decentralizedGoToServerScript.js
+
 (function () {
+    var _localStore={};
+    var CHECK_TIME = 6000;
     var ws;
     var wsReady = false;
     var shutdownBool = false;
@@ -13,47 +18,71 @@
     var webSocketUrl = ipJsonUrl.split("/")[2].split(":")[0];
     var pathToWS = "/interim/d-goto/ws";
     var WEB_SOCKET_URL = "ws://" + webSocketUrl + pathToWS;
-    var id = Uuid.generate();
-    var entityID;
-    var entity;
-    var entityPosition;
     var entityE = {
         "owner": "Enter owner of domain",
         "domainName": "Enter domain name",
-        "port": "40102"
+        "ipAddress": "",
+        "port": "40102",
+        "customPath": ""
     };
+    var ipAddress = Script.require(ipJsonUrl + "?" + Date.now());
+
     connectWebSocket();
-    this.preload = function (entityID) {
-        var _entity = Entities.getEntityProperties(entityID, ["userData", "position"]);
-        try { entity = Object(JSON.parse(_entity.userData)); } catch (e) { entity = entityE; fixUserData(); }
+    this.preload = function(entityID) {
+        if (!(entityID in _localStore)) {
+            _localStore[entityID] = {};
+        }
+        var id = Uuid.generate();
+        var local = _localStore[entityID];
+        evalBeacon(entityID,id);
+        local.refreshInterval = Script.setInterval(function() {
+            evalBeacon(entityID,id);
+        }, CHECK_TIME);
+    };
+
+    this.unload = function(entityID) {
+        if (entityID in _localStore) {
+            var local = _localStore[entityID];
+            if (local.refreshInterval) {
+                Script.clearInterval(local.refreshInterval);
+            }
+            delete _localStore[entityID];
+        }
+    };
+
+    function evalBeacon(entityID,id) {
+        var _entity = Entities.getEntityProperties(entityID, ["userData", "position", "rotation"]);
+        var entity;
+        try {
+            entity = Object(JSON.parse(_entity.userData)); 
+        } catch (e) {
+            entity = entityE; fixUserData(); 
+        }
         function fixUserData() {
             Entities.editEntity(entityID, {
                 userData: JSON.stringify(entityE)
             });
         }
-        entityPosition = _entity;
-    }
-    
-    var ipAddress = Script.require(ipJsonUrl + "?" + Date.now());
-    
-    var interval = Script.setInterval(function () {
-
-        if (entity.hasOwnProperty("ipAddress")) {
-            ipAddress.ip = entity.ipAddress;
+        var entityPosition = _entity;
+        var addr = ipAddress.ip;     
+        if (entity.ipAddress !== "") {
+            addr = entity.ipAddress;
         }
-    
+        var path = addr + ":" + entity.port + "/" + entityPosition.position.x + "," + entityPosition.position.y + "," + entityPosition.position.z + "/" + entityPosition.rotation.w + "," + entityPosition.rotation.x + "," + entityPosition.rotation.y + "," + entityPosition.rotation.z;
+
+        if (entity.customPath !== "") {
+            path = addr + ":" + entity.port + entity.customPath;
+        }
         var avatars = AvatarList.getAvatarIdentifiers();
         var list = {
             "Domain Name": entity.domainName,
             "Owner": entity.owner,
-            "Visit": "hifi://" + ipAddress.ip + ":" + entity.port + "/" + entityPosition.position.x + "," + entityPosition.position.y + "," + entityPosition.position.z + "/",
+            "Visit": "hifi://" + path,
             "id": id,
             "People": avatars.length
         };
-
         sendWS(list);
-
-    }, 6000);
+    }
 
     function sendWS(msg, timeout) {
         if (wsReady === true) {
