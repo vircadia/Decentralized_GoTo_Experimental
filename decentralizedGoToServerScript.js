@@ -23,7 +23,8 @@
         "domainName": "Enter domain name",
         "ipAddress": "",
         "port": "40102",
-        "customPath": ""
+        "customPath": "",
+        "avatarCountRadius": ""
     };
     var ipAddress = Script.require(ipJsonUrl + "?" + Date.now());
 
@@ -64,16 +65,22 @@
             });
         }
         var entityPosition = _entity;
-        var addr = ipAddress.ip;     
-        if (entity.ipAddress !== "") {
+        var addr = ipAddress.ip;   
+        var avatars = AvatarList.getAvatarIdentifiers();
+
+        if (entity.ipAddress) {
             addr = entity.ipAddress;
         }
         var path = addr + ":" + entity.port + "/" + entityPosition.position.x + "," + entityPosition.position.y + "," + entityPosition.position.z + "/" + entityPosition.rotation.w + "," + entityPosition.rotation.x + "," + entityPosition.rotation.y + "," + entityPosition.rotation.z;
 
-        if (entity.customPath !== "") {
+        if (entity.customPath) {
             path = addr + ":" + entity.port + entity.customPath;
         }
-        var avatars = AvatarList.getAvatarIdentifiers();
+        
+        if (entity.avatarCountRadius) {
+            avatars = AvatarList.getAvatarsInRange(entityPosition.position, entity.avatarCountRadius);
+        }
+        
         var list = {
             "Domain Name": entity.domainName,
             "Owner": entity.owner,
