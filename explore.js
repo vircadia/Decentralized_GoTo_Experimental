@@ -1,4 +1,4 @@
-//  decentralizedGoTo.js
+//  explore.js
 //
 //  Created by Darlingnotin in 2019.
 //  Copyright 2019 Darlingnotin
@@ -41,7 +41,7 @@
 
         ui = new AppUi({
             buttonName: "EXPLORE",
-            home: Script.resolvePath("decentralizedGoTo.html"),
+            home: Script.resolvePath("explore.html"),
             graphicsDirectory: scriptDir
         });
     }
