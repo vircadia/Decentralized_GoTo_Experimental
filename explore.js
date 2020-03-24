@@ -89,13 +89,18 @@
                 domainName: messageData.domainName,
                 port: messageData.Port
             };
+            
+            var locationBoxName = "Explore Marker (" + messageData.domainName + ")";
 
             locationboxID = Entities.addEntity({
                 position: Vec3.sum(MyAvatar.position, Quat.getFront(MyAvatar.orientation)),
                 userData: JSON.stringify(messageDataDomainInformation),
                 serverScripts: messageData.script,
                 color: { red: 255, green: 0, blue: 0 },
-                type: "Box"
+                type: "Box",
+                name: locationBoxName,
+                collisionless: true,
+                grabbable: false
             });
         } else if (messageData.action == "retrievePortInformation") {
             var readyEvent = {
