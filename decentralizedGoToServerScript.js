@@ -6,10 +6,9 @@
 //
 //  Distributed under the ISC license.
 //  See the accompanying file LICENSE or https://opensource.org/licenses/ISC
-//  https://metaverse.projectathena.io/interim/d-goto/app/decentralizedGoToServerScript.js
 
 (function () {
-    var _localStore={};
+    var _localStore = {};
     var CHECK_TIME = 6000;
     var ws;
     var wsReady = false;
