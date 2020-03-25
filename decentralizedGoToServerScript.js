@@ -53,16 +53,19 @@
     function evalBeacon(entityID,id) {
         var _entity = Entities.getEntityProperties(entityID, ["userData", "position", "rotation"]);
         var entity;
+        
         try {
             entity = Object(JSON.parse(_entity.userData)); 
         } catch (e) {
             entity = entityE; fixUserData(); 
         }
+        
         function fixUserData() {
             Entities.editEntity(entityID, {
                 userData: JSON.stringify(entityE)
             });
         }
+        
         var entityPosition = _entity;
         var addr = ipAddress.ip;   
         var avatars = AvatarList.getAvatarIdentifiers();
@@ -70,6 +73,7 @@
         if (entity.ipAddress) {
             addr = entity.ipAddress;
         }
+        
         var path = addr + ":" + entity.port + "/" + entityPosition.position.x + "," + entityPosition.position.y + "," + entityPosition.position.z + "/" + entityPosition.rotation.w + "," + entityPosition.rotation.x + "," + entityPosition.rotation.y + "," + entityPosition.rotation.z;
 
         if (entity.customPath) {
@@ -87,6 +91,7 @@
             "id": id,
             "People": avatars.length
         };
+        
         sendWS(list);
     }
 
@@ -101,6 +106,7 @@
                 } else if (timeout < (30 * 1000)) {
                     timeout += 1000;
                 }
+                
                 Script.setTimeout(function () {
                     if (wsReady === -1) {
                         connectWebSocket();
