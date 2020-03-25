@@ -1,4 +1,4 @@
-//  decentralizedGoTo.js
+//  explore.js
 //
 //  Created by Darlingnotin in 2019.
 //  Copyright 2019 Darlingnotin
@@ -41,7 +41,7 @@
 
         ui = new AppUi({
             buttonName: "EXPLORE",
-            home: Script.resolvePath("decentralizedGoTo.html"),
+            home: Script.resolvePath("explore.html"),
             graphicsDirectory: scriptDir
         });
     }
@@ -84,18 +84,26 @@
             Window.location = messageData.visit;
         } else if (messageData.action == "addLocation") {
 
-            var messageDataDomainInformation = {
+            var locationBoxUserData = {
                 owner: messageData.owner,
                 domainName: messageData.domainName,
-                port: messageData.Port
+                port: messageData.Port,
+                grabbableKey: {
+                    grabbable: false
+                }
             };
+            
+            var locationBoxName = "Explore Marker (" + messageData.domainName + ")";
 
             locationboxID = Entities.addEntity({
                 position: Vec3.sum(MyAvatar.position, Quat.getFront(MyAvatar.orientation)),
-                userData: JSON.stringify(messageDataDomainInformation),
+                userData: JSON.stringify(locationBoxUserData),
                 serverScripts: messageData.script,
                 color: { red: 255, green: 0, blue: 0 },
-                type: "Box"
+                type: "Box",
+                name: locationBoxName,
+                collisionless: true,
+                grabbable: false
             });
         } else if (messageData.action == "retrievePortInformation") {
             var readyEvent = {
