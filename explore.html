@@ -72,7 +72,7 @@
 
 <body onload="retrieveAddressList()">
 
-    <h3>Decentralized GoTo</h3>
+    <h3>Explore</h3>
 
     <input type="text" id="domainAddressInput" placeholder="Type domain address here">
 
@@ -116,7 +116,7 @@
                 myAddress = messageData.myAddress;
                 createTableFromJSON();
                 if (messageData.permission) {
-                    document.getElementById("addLocation").innerHTML = "<button class=\"myButton\" onclick=\"window.location.href = 'addLocation.html';\">Add Location To GoTo</button>";
+                    document.getElementById("addLocation").innerHTML = "<button class=\"myButton\" onclick=\"window.location.href = 'addLocation.html';\">Add Location To Explore</button>";
                 }
             }
         });
