@@ -10,7 +10,7 @@
 //  See the accompanying file LICENSE or https://opensource.org/licenses/ISC
 
 (function () {
-    var defaultGoToJSON = "https://metaverse.projectathena.io/interim/d-goto/app/goto.json";
+    var defaultGoToJSON = "https://metaverse.vircadia.com/interim/d-goto/app/goto.json";
     
     var tablet = Tablet.getTablet("com.highfidelity.interface.tablet.system");
     Menu.menuItemEvent.connect(onMenuItemEvent);
