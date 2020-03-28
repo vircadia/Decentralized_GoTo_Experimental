@@ -70,17 +70,17 @@
         var addr = ipAddress.ip;   
         var avatars = AvatarList.getAvatarIdentifiers();
 
-        if (entity.ipAddress) {
+        if (entity.ipAddress && entity.ipAddress != "") {
             addr = entity.ipAddress;
         }
         
         var path = addr + ":" + entity.port + "/" + entityPosition.position.x + "," + entityPosition.position.y + "," + entityPosition.position.z + "/" + entityPosition.rotation.w + "," + entityPosition.rotation.x + "," + entityPosition.rotation.y + "," + entityPosition.rotation.z;
 
-        if (entity.customPath) {
+        if (entity.customPath && entity.customPath != "") {
             path = addr + ":" + entity.port + entity.customPath;
         }
         
-        if (entity.avatarCountRadius) {
+        if (entity.avatarCountRadius && entity.avatarCountRadius != "") {
             avatars = AvatarList.getAvatarsInRange(entityPosition.position, entity.avatarCountRadius);
         }
         
