@@ -88,6 +88,9 @@
                 owner: messageData.owner,
                 domainName: messageData.domainName,
                 port: messageData.Port,
+                ipAddress: null,
+                avatarCountRadius: null,
+                customPath: null,
                 grabbableKey: {
                     grabbable: false
                 }
