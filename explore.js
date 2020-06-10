@@ -85,7 +85,11 @@
         } else if (messageData.action == "navigateBack") {
             location.goBack();
         } else if (messageData.action == "navigateHome") {
-            location.goToLocalSandbox();
+            if (LocationBookmarks.getHomeLocationAddress()) {
+                location.handleLookupString(LocationBookmarks.getHomeLocationAddress());
+            } else {
+                location.goToLocalSandbox();
+            }
         } else if (messageData.action == "navigateForward") {
             location.goForward();
         } else if (messageData.action == "addLocation") {
