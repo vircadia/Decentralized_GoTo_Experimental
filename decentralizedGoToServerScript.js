@@ -8,14 +8,16 @@
 //  See the accompanying file LICENSE or https://opensource.org/licenses/ISC
 
 (function () {
+    var ipJsonUrl = Script.resolvePath("ip.json");
+    var webSocketUrl = ipJsonUrl.split("/")[2].split(":")[0];
+    var webSocketPort = ""; // Leave empty if no specific port.
+    var pathToWS = webSocketPort + "/interim/d-goto/ws";
+    
     var _localStore = {};
     var CHECK_TIME = 6000;
     var ws;
     var wsReady = false;
     var shutdownBool = false;
-    var ipJsonUrl = Script.resolvePath("ip.json");
-    var webSocketUrl = ipJsonUrl.split("/")[2].split(":")[0];
-    var pathToWS = "/interim/d-goto/ws";
     var WEB_SOCKET_URL = "ws://" + webSocketUrl + pathToWS;
     var entityE = {
         "owner": "Enter owner of domain",
