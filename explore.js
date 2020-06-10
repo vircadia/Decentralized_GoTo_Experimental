@@ -82,6 +82,12 @@
 
         } else if (messageData.action == "goToUrl") {
             Window.location = messageData.visit;
+        } else if (messageData.action == "navigateBack") {
+            location.goBack();
+        } else if (messageData.action == "navigateHome") {
+            location.goToLocalSandbox();
+        } else if (messageData.action == "navigateForward") {
+            location.goForward();
         } else if (messageData.action == "addLocation") {
 
             var locationBoxUserData = {
