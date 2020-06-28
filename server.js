@@ -42,7 +42,7 @@ http.createServer(function (request, response) {
     pageData = [];
     for (let i = 0; i < pageInformation.length; i++) {
       pageData[i] = {};
-      pageData[i]["Domain Name"] = pageInformation[i]["Domain Name"];
+      pageData[i]["Place Name"] = pageInformation[i]["Place Name"];
       pageData[i].Owner = pageInformation[i].Owner;
       pageData[i].Visit = pageInformation[i].Visit;
       pageData[i].People = pageInformation[i].People;

@@ -105,8 +105,8 @@
     <select id="javascriptURL">
     </select>
     
-    <h3>Domain Name</h3>
-    <input type="text" id="domainName" placeholder="Enter Domain Name here">
+    <h3>Place Name</h3>
+    <input type="text" id="domainName" placeholder="Enter Place Name here">
     
     <h3>Owner</h3>
     <input type="text" id="owner" placeholder="Enter Owner here">
@@ -138,11 +138,11 @@
         function addLocation() {
             var domainName = document.getElementById("domainName").value;
             if (domainName == "") {
-                domainName = "Enter domain name";
+                domainName = "Enter place name";
             }
             var owner = document.getElementById("owner").value;
             if (owner == "") {
-                owner = "Enter owner of domain";
+                owner = "Enter owner of place";
             }
             var port = document.getElementById("port").value;
             var javascriptURL = document.getElementById("javascriptURL").value;

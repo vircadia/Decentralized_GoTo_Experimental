@@ -92,7 +92,7 @@
                     for (let i = 0; i < myAddress.length; i++) {
                         delete myAddress[i].age;
                         delete myAddress[i].id;
-                        myAddress[i]["Domain Name"] = myAddress[i]["Domain Name"].replace(/</g, '&lt;').replace(/>/g, '&lt;');
+                        myAddress[i]["Place Name"] = myAddress[i]["Place Name"].replace(/</g, '&lt;').replace(/>/g, '&lt;');
                         myAddress[i].Owner = myAddress[i].Owner.replace(/</g, '&lt;').replace(/>/g, '&lt;');
                     }
 

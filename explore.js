@@ -66,7 +66,7 @@
             for (var z = 0; z < children.length; z++) {
                 delete children[z].age;
                 delete children[z].id;
-                children[z]["Domain Name"] = children[z]["Domain Name"].replace(/</g, '&lt;').replace(/>/g, '&lt;');
+                children[z]["Place Name"] = children[z]["Place Name"].replace(/</g, '&lt;').replace(/>/g, '&lt;');
                 children[z].Owner = children[z].Owner.replace(/</g, '&lt;').replace(/>/g, '&lt;');
             }
 

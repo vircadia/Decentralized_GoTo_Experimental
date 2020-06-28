@@ -20,8 +20,8 @@
     var shutdownBool = false;
     var WEB_SOCKET_URL = "ws://" + webSocketUrl + pathToWS;
     var entityE = {
-        "owner": "Enter owner of domain",
-        "domainName": "Enter domain name",
+        "owner": "Enter owner of place",
+        "domainName": "Enter place name",
         "ipAddress": "",
         "port": "40102",
         "customPath": "",
@@ -87,7 +87,7 @@
         }
         
         var list = {
-            "Domain Name": entity.domainName,
+            "Place Name": entity.domainName,
             "Owner": entity.owner,
             "Visit": "hifi://" + path,
             "id": id,
