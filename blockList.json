@@ -1,2 +1,9 @@
-[
-]
+{
+	"addresses" : {
+		"martians":  [ "becc30d85274d04c45b8a5dde99e31cf" ]
+	},
+	"words" : {
+		"swear words" : [ "thunderation", "gadzooks" ]
+	}
+
+}
