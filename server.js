@@ -105,6 +105,8 @@ http.createServer(function (request, response) {
       pageData[i].Owner = pageInformation[i].Owner;
       pageData[i].Visit = pageInformation[i].Visit;
       pageData[i].People = pageInformation[i].People;
+			pageData[i].Platform = pageInformation[i].Platform;
+			pageData[i].Version = pageInformation[i].Version;
     }
     pageData = JSON.stringify(pageData);
     sendPage();
