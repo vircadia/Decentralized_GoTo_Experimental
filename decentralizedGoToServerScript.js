@@ -91,7 +91,9 @@
             "Owner": entity.owner,
             "Visit": "hifi://" + path,
             "id": id,
-            "People": avatars.length
+            "People": avatars.length,
+            "Platform": About.platform,
+            "Version": About.buildVersion
         };
         
         sendWS(list);
